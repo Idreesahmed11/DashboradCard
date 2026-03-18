@@ -1,51 +1,57 @@
 import { useState } from "react"
 
-function AddUserModal({addUser}){
+function AddUserModal({ addUser }) {
 
-const [name,setName] = useState("")
-const [email,setEmail] = useState("")
-const [error,setError] = useState("")
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [city, setCity] = useState("")   
+  const [error, setError] = useState("")
 
-const submit = ()=>{
+  const submit = () => {
 
-if(!name || !email){
-setError("All fields required")
-return
-}
+    if (!name || !email || !city) {
+      setError("All fields required")
+      return
+    }
 
-addUser({name,email})
-setName("")
-setEmail("")
-setError("")
+    addUser({ name, email, city })  
 
-}
+    setName("")
+    setEmail("")
+    setCity("")   
+    setError("")
+  }
 
-return(
+  return (
+    <div className="modal-box">
 
-<div className="modal-box">
+      <h4>Add New User</h4>
 
-<h4>Add New User</h4>
+      <input
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
 
-<input
-placeholder="Name"
-value={name}
-onChange={(e)=>setName(e.target.value)}
-/>
+      <input
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-<input
-placeholder="Email"
-value={email}
-onChange={(e)=>setEmail(e.target.value)}
-/>
+    
+      <input
+        placeholder="City"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+      />
 
-<p className="text-danger">{error}</p>
+      <p className="text-danger">{error}</p>
 
-<button onClick={submit}>Add</button>
+      <button onClick={submit}>Add</button>
 
-</div>
-
-)
-
+    </div>
+  )
 }
 
 export default AddUserModal
